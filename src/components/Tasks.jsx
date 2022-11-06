@@ -1,14 +1,12 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { Task } from "@mui/icons-material";
+import { Paper, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-
-const Tasks = ({ tasks }) => {
-  console.log(tasks);
+const Tasks = ({ tasks, deleteTask, changeReminder }) => {
   return (
     <Box
       justifyContent="space-between"
       sx={{
-        border: 1,
-        width: 500,
         padding: "10px",
         margin: "auto",
       }}
@@ -17,11 +15,18 @@ const Tasks = ({ tasks }) => {
         <Paper
           key={task.id}
           elevation={3}
-          sx={{ width: "96%", padding: "10px", mb: "10px" }}
+          sx={{
+            padding: "10px",
+            mb: "10px",
+            borderLeft: task.reminder ? 2 : "",
+            borderColor: "primary.main",
+          }}
+          onDoubleClick={() => changeReminder(task.id)}
         >
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h6">{task.text}</Typography>
-            <CloseIcon />
+            <CloseIcon onClick={() => deleteTask(task.id)} />{" "}
+            {/* on onClick equals to a function that will call deleteTask delete function from App.js and will send task id as argument*/}
           </div>
           <Typography variant="subtitle2">{task.day}</Typography>
         </Paper>

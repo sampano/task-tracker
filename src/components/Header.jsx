@@ -1,14 +1,12 @@
 import * as React from "react";
 import { Box, Typography, Button } from "@mui/material";
 
-export default function BoxSx() {
+const Header = ({ onAdd, showAddTask }) => {
   return (
     <Box
       display="flex"
       justifyContent="space-between"
       sx={{
-        border: 1,
-        width: 500,
         padding: "10px",
         margin: "auto",
         // "&:hover": {
@@ -21,7 +19,16 @@ export default function BoxSx() {
         Task Tracker
       </Typography>
 
-      <Button variant="contained">Add</Button>
+      <Button
+        variant="contained"
+        color={showAddTask ? "error" : "primary"}
+        onClick={onAdd}
+      >
+        {" "}
+        {showAddTask ? "Close" : "Add"}
+      </Button>
     </Box>
   );
-}
+};
+
+export default Header;
